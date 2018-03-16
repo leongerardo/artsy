@@ -1,12 +1,3 @@
 _site
 .sass-cache
 .jekyll-metadata
-.pygments-cache/
-_gh-pages
-css/screen.css
-css/epic.css
-.DS_Store
-.Ulysses-favorites.plist
-css/posts/
-.ruby-version
-.ruby-gemset

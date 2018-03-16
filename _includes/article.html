@@ -1,4 +1,4 @@
-{% if page.single == true %}
+{% if single == true %}
 <div class="article-container-single {{ page.article-class }}">
 {% else %}
 <div class="article-container">
@@ -8,7 +8,7 @@
     <div class="meta-container">
       <header>
         {% unless page.meta == false %}
-          <a href="{{ root_url }}{{ post.url }}">
+          <a href="{{ post.url | relative_url }}">
         {% endunless %}
         {% if index %}
           <h2 class="entry-title">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</h2>
@@ -25,7 +25,7 @@
     {% if index %}
     {% if post.content contains '<!-- more -->' %}
         {{ post.content | split:'<!-- more -->' | first }}
-        <p><a href="{{ post.url }}">Read on →</a></p>
+        <p><a href="{{ post.url | relative_url }}">Read on →</a></p>
     {% else %}
         {{ post.content }}
     {% endif %}
@@ -38,29 +38,6 @@
       <p class="meta-author">
         {% include post/author.html %}
       </p>
-      <p class="meta-categories">
-        Categories: {% include post/categories.html %}
-      </p>
-      {% if page.series %}
-       <p class="meta-series" style="padding-bottom:0;">Part of a series: <strong>{{ page.series | series_link }}</strong></p>
-       <ul>
-         {% for post in site.posts %}
-          {% if post.series == page.series %}
-          <li>{% include archive_post.html %}</li>
-          {% endif %}
-        {% endfor %}
-
-       </ul>
-      {% endif %}
-
-      {% if site.disqus_short_name and page.comments == true %}
-        <hr/>
-        <section class="comments">
-          <h1>Comments</h1>
-          <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
-        </section>
-        <hr/>
-      {% endif %}
 
       <p class="meta-paginate">
         {% if page.previous.url %}
